@@ -1,3 +1,0 @@
-/workspaces/stm32f103c8t6-vscode-project/stm32f103c8t6-project/build/debug/CMakeFiles/rebuild_cache.dir
-/workspaces/stm32f103c8t6-vscode-project/stm32f103c8t6-project/build/debug/CMakeFiles/edit_cache.dir
-/workspaces/stm32f103c8t6-vscode-project/stm32f103c8t6-project/build/debug/CMakeFiles/stm32f103c8t6-project.dir

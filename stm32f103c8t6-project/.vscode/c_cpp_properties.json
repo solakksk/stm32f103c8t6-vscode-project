@@ -9,6 +9,10 @@
              * such as include paths, browse paths, defines, etc.
              */
             "name": "STM32",
+            "includePath":[
+                "${workspaceFolder}/Inc",
+                "${workspaceFolder}/Src"
+            ],
             "configurationProvider": "ms-vscode.cmake-tools",
             "intelliSenseMode": "${default}"
         }
