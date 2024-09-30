@@ -15,11 +15,37 @@
  *
  ******************************************************************************
  */
+#define USE_STDPERIPH_DRIVER //使用标准外设库
+#include "stm32f10x.h"
 
-#include <stdint.h>
+void delay(__IO uint32_t nCount){
 
+    for(; nCount != 0; nCount--);
+}
 int main(void)
 {
-    /* Loop forever */
-	for(;;);
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+    GPIOA->CRH &= (uint32_t)0xFFFFFFF0;
+    GPIOA->CRH |= (uint32_t)0x00000003;
+    GPIOA->ODR |= (uint16_t)0x0100;
+    //GPIOA->ODR &= (uint16_t)0xFEFF;
+    //while(1){};
+	while(1){
+        GPIOA->ODR &= ~((uint16_t)0x0100);
+        delay(15000000);
+        GPIOA->ODR |= (uint16_t)0x0100;
+        delay(15000000);
+        GPIOA->ODR &= ~((uint16_t)0x0100);
+        delay(15000000);
+        GPIOA->ODR |= (uint16_t)0x0100;
+        delay(1000000);
+        GPIOA->ODR &= ~((uint16_t)0x0100);
+        delay(1000000);
+        GPIOA->ODR |= (uint16_t)0x0100;
+        delay(1000000);
+        GPIOA->ODR &= ~((uint16_t)0x0100);
+        delay(1000000);
+        GPIOA->ODR |= (uint16_t)0x0100;
+        delay(1000000);
+    }
 }

@@ -67,10 +67,14 @@ set(linker_OPTS)
 # information to the project
 include("cmake/vscode_generated.cmake")
 
+#exposed project include for use by libs
+include_directories(Inc)
+
 # Link directories setup
 # Must be before executable is added
 link_directories(${CMAKE_PROJECT_NAME} ${link_DIRS})
-
+#add cmakelists.txt subdir
+add_subdirectory(libs/STM32F10x_StdPeriph_Driver)
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME})
 
@@ -84,7 +88,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>: ${include_cxx_DIRS}>
     $<$<COMPILE_LANGUAGE:ASM>: ${include_asm_DIRS}>
 )
-
 # Add project symbols (macros)
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     ${symbols_SYMB}
@@ -98,7 +101,7 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 # Add linked libraries
-target_link_libraries(${CMAKE_PROJECT_NAME} ${link_LIBS})
+target_link_libraries(${CMAKE_PROJECT_NAME} ${link_LIBS} stdp)
 
 # Compiler options
 target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
