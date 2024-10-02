@@ -15,21 +15,29 @@
  *
  ******************************************************************************
  */
+
 #define USE_STDPERIPH_DRIVER //使用标准外设库
+#define USE_FULL_ASSERT //使用断言
 #include "stm32f10x.h"
+#include "stm32f10x_it.h"
 
 void delay(__IO uint32_t nCount){
 
     for(; nCount != 0; nCount--);
 }
+void assert_failed(uint8_t* file, uint32_t line){
+    //assert failed will be execute
+    //printf("\r\nERROR:输入参数错误,错误文件=%s,错误行号=%s",file,line);
+}
+
 int main(void)
 {
-    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+    //RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
     GPIOA->CRH &= (uint32_t)0xFFFFFFF0;
     GPIOA->CRH |= (uint32_t)0x00000003;
     GPIOA->ODR |= (uint16_t)0x0100;
     //GPIOA->ODR &= (uint16_t)0xFEFF;
-    //while(1){};
 	while(1){
         GPIOA->ODR &= ~((uint16_t)0x0100);
         delay(15000000);
