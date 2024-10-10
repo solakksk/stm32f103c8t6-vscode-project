@@ -8,7 +8,7 @@
 /* Uncomment the line below to expanse the "assert_param" macro in the 
    Standard Peripheral Library drivers code */
 /* #define USE_FULL_ASSERT    1 */
-#include "stm32f10x.h"
+#include <stdint.h>
 #define USE_FULL_ASSERT
 
 /* Exported macro ------------------------------------------------------------*/

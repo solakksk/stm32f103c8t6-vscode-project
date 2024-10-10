@@ -19,20 +19,25 @@ set(linker_script_SRC ${linker_script_SRC}
 )
 
 # Sources
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/bsp/src bsp_SRCS)
 set(sources_SRCS ${sources_SRCS}
     
 	${CMAKE_CURRENT_SOURCE_DIR}/Src/main.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Src/core_cm3.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Src/system_stm32f10x.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32f10x_it.c
 	${CMAKE_CURRENT_SOURCE_DIR}/Src/syscall.c
 	${CMAKE_CURRENT_SOURCE_DIR}/Src/sysmem.c
-	${CMAKE_CURRENT_SOURCE_DIR}/Startup/startup_stm32f103c8tx.s
+	#${CMAKE_CURRENT_SOURCE_DIR}/Startup/startup_stm32f103c8tx.s
+    ${CMAKE_CURRENT_SOURCE_DIR}/Startup/startup_stm32f10x_md.s
+    ${bsp_SRCS}
 )
 
 # Include directories
 set(include_c_DIRS ${include_c_DIRS}
     
 	${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/bsp/inc
 )
 set(include_cxx_DIRS ${include_cxx_DIRS}
     

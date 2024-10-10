@@ -158,3 +158,12 @@ void SysTick_Handler(void)
 
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+void EXTI0_IRQHandler(void){
+        for(int i=0;i<3;i++){
+        GPIOA->ODR &= ~((uint16_t)0x0100);
+        delay(500000);
+        GPIOA->ODR |= (uint16_t)0x0100;
+        delay(500000);
+    }
+    EXTI_ClearITPendingBit(EXTI_Line0);
+}

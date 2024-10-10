@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stm32f10x_assert.h": "c",
+        "stdint.h": "c",
+        "stm32f10x_it.h": "c"
+    }
+}

@@ -20,6 +20,9 @@
 #define USE_FULL_ASSERT //使用断言
 #include "stm32f10x.h"
 #include "stm32f10x_it.h"
+#include "led.h"
+#include "exti.h"
+#include "delay.h"
 
 void delay(__IO uint32_t nCount){
 
@@ -28,32 +31,40 @@ void delay(__IO uint32_t nCount){
 void assert_failed(uint8_t* file, uint32_t line){
     //assert failed will be execute
     //printf("\r\nERROR:输入参数错误,错误文件=%s,错误行号=%s",file,line);
-}
-
-int main(void)
-{
-    //RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
     GPIOA->CRH &= (uint32_t)0xFFFFFFF0;
     GPIOA->CRH |= (uint32_t)0x00000003;
     GPIOA->ODR |= (uint16_t)0x0100;
     //GPIOA->ODR &= (uint16_t)0xFEFF;
-	while(1){
+    for(int i=0;i<20;i++){
         GPIOA->ODR &= ~((uint16_t)0x0100);
-        delay(15000000);
+        delay(500000);
         GPIOA->ODR |= (uint16_t)0x0100;
-        delay(15000000);
-        GPIOA->ODR &= ~((uint16_t)0x0100);
-        delay(15000000);
-        GPIOA->ODR |= (uint16_t)0x0100;
-        delay(1000000);
-        GPIOA->ODR &= ~((uint16_t)0x0100);
-        delay(1000000);
-        GPIOA->ODR |= (uint16_t)0x0100;
-        delay(1000000);
-        GPIOA->ODR &= ~((uint16_t)0x0100);
-        delay(1000000);
-        GPIOA->ODR |= (uint16_t)0x0100;
-        delay(1000000);
+        delay(500000);
     }
 }
+
+int main(void)
+{
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+    keywkup_config();
+    led_init(LED_GPIOA,LED_GPIO_PIN_8);
+	while(1){
+        delay_ms(5000);
+        ledoff();
+        delay_ms(5000);
+        ledon();
+    }
+}
+/*void EXTI0_IRQHandler(void){
+        for(int i=0;i<3;i++){
+        GPIOA->ODR &= ~((uint16_t)0x0100);
+        delay(500000);
+        GPIOA->ODR |= (uint16_t)0x0100;
+        delay(500000);
+    }
+    EXTI_ClearITPendingBit(EXTI_Line0);
+}
+void SysTick_Handler(void)
+{
+}*/
