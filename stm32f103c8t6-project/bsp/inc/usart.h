@@ -1,20 +1,21 @@
 /**
   ******************************************************************************
-  * @file    delay.h
+  * @file    usart.h
   * @author  
   * @version V1.0.0
-  * @date    2024-10-10
+  * @date    2024-10-20
   * @brief   
   ******************************************************************************
   * @attention
   ******************************************************************************
   */
 
-#ifndef _DELAY_H
-#define _DELAY_H
+#ifndef _USART_H
+#define _USART_H
+
 #include "stm32f10x.h"
 
-void systick_intcmd(FunctionalState state);
-void delay_us(__IO uint32_t us);
-void delay_ms(__IO uint32_t ms);
+void usart_pa9_10_config(void);
+void usart_sendbyte(USART_TypeDef* pUSARTx,uint8_t ch);
+void usart_sendstring(USART_TypeDef* pUSARTx,char* str);
 #endif

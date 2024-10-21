@@ -23,7 +23,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
-
+#include "stm32f10x_exti.h"
+#include "stm32f10x_usart.h"
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
   */
@@ -166,4 +167,11 @@ void EXTI0_IRQHandler(void){
         delay(500000);
     }
     EXTI_ClearITPendingBit(EXTI_Line0);
+}
+void USART1_IRQHandler(void){
+  uint8_t urxTemp;
+  if(USART_GetITStatus(USART1,USART_IT_RXNE)!=RESET){
+    urxTemp=USART_ReceiveData(USART1);
+    USART_SendData(USART1,urxTemp);
+  }
 }

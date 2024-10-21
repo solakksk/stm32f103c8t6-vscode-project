@@ -23,6 +23,7 @@
 #include "led.h"
 #include "exti.h"
 #include "delay.h"
+#include "usart.h"
 
 void delay(__IO uint32_t nCount){
 
@@ -47,24 +48,14 @@ void assert_failed(uint8_t* file, uint32_t line){
 int main(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-    keywkup_config();
+    usart_pa9_10_config();
     led_init(LED_GPIOA,LED_GPIO_PIN_8);
 	while(1){
         delay_ms(5000);
         ledoff();
         delay_ms(5000);
         ledon();
+        usart_sendbyte(USART1,0x61);
+        usart_sendstring(USART1,"hello world");
     }
 }
-/*void EXTI0_IRQHandler(void){
-        for(int i=0;i<3;i++){
-        GPIOA->ODR &= ~((uint16_t)0x0100);
-        delay(500000);
-        GPIOA->ODR |= (uint16_t)0x0100;
-        delay(500000);
-    }
-    EXTI_ClearITPendingBit(EXTI_Line0);
-}
-void SysTick_Handler(void)
-{
-}*/
