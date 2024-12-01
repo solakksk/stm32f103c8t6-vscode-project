@@ -24,6 +24,7 @@
 #include "exti.h"
 #include "delay.h"
 #include "usart.h"
+#include "st7735_soft.h"
 
 void delay(__IO uint32_t nCount){
 
@@ -49,13 +50,18 @@ int main(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
     usart_pa9_10_config();
+    LCD_GPIO_Config();
+    LCD_init();
+    LCD_clear(BLACK);
     led_init(LED_GPIOA,LED_GPIO_PIN_8);
 	while(1){
-        delay_ms(5000);
+        delay_ms(1000);
         ledoff();
-        delay_ms(5000);
+        delay_ms(1000);
         ledon();
-        usart_sendbyte(USART1,0x61);
-        usart_sendstring(USART1,"hello world");
+        usart_sendstring(USART1,"hello world\n");
+        LCD_showString(1,1,"hello world",BLUE);
+        delay_ms(5000);
+        LCD_clear(BLACK);
     }
 }
