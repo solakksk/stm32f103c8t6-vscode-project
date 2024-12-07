@@ -24,7 +24,7 @@
 #include "exti.h"
 #include "delay.h"
 #include "usart.h"
-#include "st7735_soft.h"
+#include "st7735.h"
 
 void delay(__IO uint32_t nCount){
 
@@ -61,6 +61,7 @@ int main(void)
         ledon();
         usart_sendstring(USART1,"hello world\n");
         LCD_showString(1,1,"hello world",BLUE);
+        LCD_showImg(1,17,0,BLACK);
         delay_ms(5000);
         LCD_clear(BLACK);
     }

@@ -25,14 +25,14 @@
 #define LCD_SDA_CLR() GPIO_ResetBits(GPIOA, GPIO_Pin_7)
 #define LCD_SDA_SET() GPIO_SetBits(GPIOA, GPIO_Pin_7)
 //RES
-#define LCD_RST_CLR()  GPIO_ResetBits(GPIOA, GPIO_Pin_4)
-#define LCD_RST_SET()  GPIO_SetBits(GPIOA, GPIO_Pin_4)
+#define LCD_RST_CLR()  GPIO_ResetBits(GPIOA, GPIO_Pin_6)
+#define LCD_RST_SET()  GPIO_SetBits(GPIOA, GPIO_Pin_6)
 //DC
-#define LCD_DC_CLR()   GPIO_ResetBits(GPIOA, GPIO_Pin_6)
-#define LCD_DC_SET()   GPIO_SetBits(GPIOA, GPIO_Pin_6)
+#define LCD_DC_CLR()   GPIO_ResetBits(GPIOA, GPIO_Pin_1)
+#define LCD_DC_SET()   GPIO_SetBits(GPIOA, GPIO_Pin_1)
 //CS     
-#define LCD_CS_CLR()   GPIO_ResetBits(GPIOA, GPIO_Pin_1)
-#define LCD_CS_SET()   GPIO_SetBits(GPIOA, GPIO_Pin_1)
+#define LCD_CS_CLR()   GPIO_ResetBits(GPIOA, GPIO_Pin_4)
+#define LCD_CS_SET()   GPIO_SetBits(GPIOA, GPIO_Pin_4)
 //BLK
 #define LCD_BLK_Clr()  GPIO_ResetBits(GPIOB,GPIO_Pin_10)
 #define LCD_BLK_Set()  GPIO_SetBits(GPIOB,GPIO_Pin_10)
@@ -78,18 +78,18 @@
 #define GRAY 0x8410 //GRAY 灰色
 #endif
 
-void LCD_GPIO_Config(void);
-void writeBus(uint8_t data);
-void LCD_writeData8(uint8_t data);
-void LCD_writeData(uint16_t data);
-void LCD_writeCommand(uint8_t data);
-void LCD_setAddress(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
-void LCD_init(void);
-void LCD_clear(uint16_t color);
-void LCD_drawPoint(uint16_t x, uint16_t y, uint16_t color);
-void LCD_showChar(uint16_t x, uint16_t y, uint8_t chr, uint16_t color);
-void LCD_showString(uint16_t x, uint16_t y, char *p, uint16_t color);
+void SOFT_LCD_GPIO_Config(void);
+void SOFT_writeBus(uint8_t data);
+void SOFT_LCD_writeData8(uint8_t data);
+void SOFT_LCD_writeData(uint16_t data);
+void SOFT_LCD_writeCommand(uint8_t data);
+void SOFT_LCD_setAddress(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
+void SOFT_LCD_init(void);
+void SOFT_LCD_clear(uint16_t color);
+void SOFT_LCD_drawPoint(uint16_t x, uint16_t y, uint16_t color);
+void SOFT_LCD_showChar(uint16_t x, uint16_t y, uint8_t chr, uint16_t color);
+void SOFT_LCD_showString(uint16_t x, uint16_t y, char *p, uint16_t color);
 
-extern uint16_t BACK_COLOR;
+extern uint16_t SOFT_BACK_COLOR;
 
 #endif /* __LCD_H */
